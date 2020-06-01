@@ -15,7 +15,14 @@ request(url, function (err, response, body) {
   } else {
 	let weather = JSON.parse(body)
 
-	let message = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+	const tempKelvin = weather.main.temp;  
+	// Temperature forecast in Celcius
+	let celcius = Math.round(tempKelvin - 273);
+
+	// Convert Celcius to Fahrenheit. Rounds down when a decimal is present.
+	let fahrenheit = Math.floor(celcius * (9/5) + 32);
+
+	let message = `It's ${fahrenheit} degrees Fahrenheit (${celcius} Celcius) in ${weather.name}!`;
 console.log(message);}
 
 });
